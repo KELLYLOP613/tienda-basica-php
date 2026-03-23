@@ -17,7 +17,7 @@ width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293
         </svg> 
         <p class="text-gray-500 text-lg mt-4">Tu carrito está vacío</p> 
         <a href="{{ route('products.index') }}" class="inline-block mt-4 bg
-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700"> 
+purple-600 text-white py-2 px-6 rounded hover:bg-purple-700"> 
             Ver productos 
         </a> 
     </div> 
@@ -51,8 +51,8 @@ class="flex items-center">
                             value="{{ $item['quantity'] }}"  
                             min="1"  
                             class="w-16 text-center border rounded py-1"> 
-                    <button type="submit" class="ml-2 text-blue-600 hover:text
-blue-800"> 
+                    <button type="submit" class="ml-2 text-purple-600 hover:text
+purple-800"> 
                         Actualizar 
                     </button> 
                 </form> 
@@ -78,7 +78,7 @@ ml-4">
         {{-- Total --}} 
         <div class="mt-6 text-right"> 
             <span class="text-lg">Total:</span> 
-            <span class="text-2xl font-bold text-blue-600 ml-4">${{ 
+            <span class="text-2xl font-bold text-purple-600 ml-4">${{ 
 number_format($total, 2) }}</span> 
         </div> 
 
@@ -90,8 +90,8 @@ number_format($total, 2) }}</span>
             </a> 
             <form action="{{ route('checkout.store') }}" method="POST"> 
                 @csrf 
-                <button type="submit" class="bg-green-600 text-white py-2 px-6 
-rounded hover:bg-green-700"> 
+                <button type="submit" class="bg-pink-600 text-white py-2 px-6 
+rounded hover:bg-pink-700"> 
                     Proceder al pago 
                 </button> 
             </form> 

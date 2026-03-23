@@ -26,10 +26,10 @@
                 <p class="text-gray-600 text-sm mb-4">{{ Str::limit($product->description, 100) }}</p>
 
                 <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-blue-600">
+                    <span class="text-2xl font-bold text-purple-600">
                         ${{ number_format($product->price, 2) }}
                     </span>
-                    <span class="text-sm {{ $product->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
+                    <span class="text-sm {{ $product->stock > 0 ? 'text-pink-600' : 'text-red-600' }}">
                         {{ $product->stock > 0 ? 'Stock: ' . $product->stock : 'Agotado' }}
                     </span>
                 </div>
@@ -43,7 +43,7 @@
                     <form action="{{ route('cart.add', $product) }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+                            class="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700 transition">
                             Agregar
                         </button>
                     </form>

@@ -14,8 +14,8 @@ enctype="multipart/form-data" class="space-y-6">
             @include('admin.products._form') 
 
             <div class="flex items-center gap-3"> 
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 
-rounded hover:bg-blue-700"> 
+                <button type="submit" class="bg-purple-600 text-white py-2 px-4 
+rounded hover:bg-purple-700"> 
                     Guardar 
                 </button> 
                 <a href="{{ route('admin.products.index') }}" class="bg-gray-200 

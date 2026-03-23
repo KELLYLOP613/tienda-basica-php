@@ -80,6 +80,7 @@ eliminado correctamente.');
         ]); 
 
         $data['active'] = $request->boolean('active'); 
+        $data['sizes'] = $request->input('sizes', []);
 
         return $data; 
     } 

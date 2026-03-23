@@ -6,8 +6,8 @@
 <div class="max-w-7xl mx-auto px-4"> 
     <div class="flex items-center justify-between mb-6"> 
         <h1 class="text-3xl font-bold">Administrar Productos</h1> 
-        <a href="{{ route('admin.products.create') }}" class="bg-blue-600 
-text-white py-2 px-4 rounded hover:bg-blue-700"> 
+        <a href="{{ route('admin.products.create') }}" class="bg-purple-600 
+text-white py-2 px-4 rounded hover:bg-purple-700"> 
             Nuevo producto 
         </a> 
     </div> 
@@ -50,7 +50,7 @@ red-600' }}">
                         <td class="p-3"> 
                             <div class="flex items-center gap-3"> 
                                 <a href="{{ route('admin.products.edit', $product) }}" 
-class="text-blue-600 hover:text-blue-800"> 
+class="text-purple-600 hover:text-purple-800"> 
                                     Editar 
                                 </a> 
 

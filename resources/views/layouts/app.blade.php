@@ -4,7 +4,7 @@
 <meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial
 scale=1.0"> 
-    <title>@yield('title', 'Mi Tienda')</title> 
+    <title>@yield('title', 'BellaModa Boutique')</title> 
 
     {{-- Tailwind CSS (recomendado) --}} 
     <script src="https://cdn.tailwindcss.com"></script> 
@@ -23,8 +23,8 @@ file_exists(public_path('hot')))
         <div class="max-w-7xl mx-auto px-4"> 
             <div class="flex justify-between items-center h-16"> 
                 <div class="flex space-x-4"> 
-                    <a href="{{ route('home') }}" class="font-bold text-xl">Mi 
-Tienda</a> 
+                    <a href="{{ route('home') }}" class="font-bold text-xl">BellaModa 
+Boutique</a> 
                     <a href="{{ route('products.index') }}" class="hover:text-gray
 600">Productos</a> 
                     <a href="{{ route('admin.products.index') }}" class="hover:text
@@ -53,7 +53,7 @@ rounded-full w-5 h-5 flex items-center justify-center text-xs">
 
     {{-- Mensajes flash --}} 
     @if(session('success')) 
-        <div class="bg-green-100 border border-green-400 text-green-700 
+        <div class="bg-pink-100 border border-pink-400 text-pink-700 
 px-4 py-3 rounded relative m-4" role="alert"> 
             <span class="block sm:inline">{{ session('success') }}</span> 
         </div> 

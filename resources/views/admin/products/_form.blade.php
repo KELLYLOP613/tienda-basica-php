@@ -88,5 +88,22 @@ class="rounded border-gray-300"
 > 
 <label for="active" class="text-sm text-gray-700">Producto 
 activo</label> 
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-2">Tallas disponibles</label>
+    <div class="flex gap-3">
+        @foreach(['XS', 'S', 'M', 'L', 'XL'] as $size)
+        <label class="flex items-center gap-1 cursor-pointer">
+            <input
+                type="checkbox"
+                name="sizes[]"
+                value="{{ $size }}"
+                {{ in_array($size, old('sizes', $product->sizes ?? [])) ? 'checked' : '' }}
+                class="rounded border-gray-300"
+            >
+            <span class="font-medium">{{ $size }}</span>
+        </label>
+        @endforeach
+    </div>
+</div>
 </div> 
 </div> 
