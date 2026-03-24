@@ -35,9 +35,11 @@ $item['name'] }}" class="w-full h-full object-cover rounded">
 
             {{-- Detalles --}} 
             <div class="flex-1 ml-4"> 
-                <h3 class="font-bold">{{ $item['name'] }}</h3> 
-                <p class="text-gray-600">${{ number_format($item['price'], 2) }} 
-c/u</p> 
+                <h3 class="font-bold">{{ $item['name'] }}</h3>
+                @if(!empty($item['size']))
+                <p class="text-sm text-purple-600 font-medium">Talla: {{ $item['size'] }}</p>
+                @endif
+                <p class="text-gray-600">${{ number_format($item['price'], 2) }} c/u</p>
             </div> 
 
             {{-- Cantidad --}} 

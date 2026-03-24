@@ -16,36 +16,39 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total')); 
     } 
 
-    public function add(Request $request, Product $product) 
-    { 
-        if (!$product->active) { 
-            return redirect()->back()->with('error', 'Este producto no esta 
-disponible.'); 
-        } 
+    public function add(Request $request, Product $product)
+    {
+    if (!$product->active) {
+        return redirect()->back()->with('error', 'Este producto no está disponible.');
+    }
 
-        if ($product->stock < 1) { 
-            return redirect()->back()->with('error', 'Este producto no tiene stock 
-disponible.'); 
-        } 
+    if ($product->stock < 1) {
+        return redirect()->back()->with('error', 'Este producto no tiene stock disponible.');
+    }
+    if ($product->sizes && count($product->sizes) > 0 && !$request->input('size')){
+        return redirect()->back()->with('error', 'Por favor selecciona una talla.');
+    }
 
-        $cart = session()->get('cart', []); 
-        $currentQuantity = $cart[$product->id]['quantity'] ?? 0; 
+    $quantity = max(1, (int) $request->input('quantity', 1));
+    $size = $request->input('size', null);
+    $cartKey = $product->id . '_' . $size;
+    $cart = session()->get('cart', []);
+    $currentQuantity = $cart[$cartKey]['quantity'] ?? 0;
 
-        if ($currentQuantity >= $product->stock) { 
-            return redirect()->back()->with('error', 'No puedes agregar mas unidades 
-que el stock disponible.'); 
-        } 
+    if ($currentQuantity + $quantity > $product->stock) {
+        return redirect()->back()->with('error', 'No puedes agregar más unidades que el stock disponible.');
+    }
 
-        $cart[$product->id] = [ 
-            'name' => $product->name, 
-            'price' => $product->price, 
-            'quantity' => $currentQuantity + 1, 
-            'image' => $product->image, 
-        ]; 
+    $cart[$cartKey] = [
+        'name' => $product->name,
+        'price' => $product->price,
+        'quantity' => $currentQuantity + $quantity,
+        'image' => $product->image,
+        'size' => $size,
+    ];
 
-        session()->put('cart', $cart); 
-
-        return redirect()->back()->with('success', 'Producto agregado al carrito.'); 
+    session()->put('cart', $cart);
+    return redirect()->back()->with('success', 'Producto agregado al carrito.');
     } 
 
     public function update(Request $request, $id) 
@@ -115,11 +118,16 @@ actualizada.');
             return []; 
         } 
 
-        $products = Product::whereIn('id', array_keys($cart))->get()->keyBy('id'); 
+        $productIds = array_map(function($key) {
+        return explode('_', $key)[0];
+        }, array_keys($cart));
+
+        $products = Product::whereIn('id', $productIds)->get()->keyBy('id'); 
         $syncedCart = []; 
 
-        foreach ($cart as $id => $item) { 
-            $product = $products->get((int) $id); 
+        foreach ($cart as $cartKey => $item) { 
+            $productId = explode('_', $cartKey) [0];
+            $product = $products->get((int) $productId); 
 
             if (!$product || !$product->active || $product->stock < 1) { 
                 continue; 
@@ -127,11 +135,12 @@ actualizada.');
 
             $quantity = max(1, min((int) $item['quantity'], $product->stock)); 
 
-            $syncedCart[$id] = [ 
+            $syncedCart[$cartKey] = [ 
                 'name' => $product->name, 
                 'price' => $product->price, 
                 'quantity' => $quantity, 
                 'image' => $product->image, 
+                'size' => $item['size'] ?? null,
             ]; 
         } 
 

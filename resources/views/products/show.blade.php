@@ -32,22 +32,7 @@ gray-400">
             <p class="text-gray-700 mb-6"> 
                 {{ $product->description ?: 'Sin descripcion.' }} 
             </p> 
-            @if($product->sizes && count($product->sizes) > 0)
-            <div class="mb-6">
-            <p class="text-sm font-medium text-gray-700 mb-2">Selecciona tu talla:</p>
-            <div class="flex gap-2">
-            @foreach($product->sizes as $size)
-            <label class="cursor-pointer">
-            <input type="radio" name="size" value="{{ $size }}" class="hidden peer">
-            <span class="px-3 py-1 border-2 border-gray-300 rounded font-medium peer-checked:border-purple-600 peer-checked:text-purple-600 hover:border-purple-400 transition">
-                {{ $size }}
-            </span>
-        </label>
-        @endforeach
-    </div>
-</div>
-@endif
-
+            
             <div class="mb-6"> 
                 <p class="text-3xl font-bold text-purple-600">${{ 
 number_format($product->price, 2) }}</p> 
@@ -70,6 +55,25 @@ gray-300 transition"
                 @if($product->active && $product->stock > 0) 
                     <form action="{{ route('cart.add', $product) }}" method="POST">
     @csrf
+
+    {{-- Tallas --}}
+                    @if($product->sizes && count($product->sizes) > 0)
+                    <div class="mb-4">
+                        <p class="text-sm font-medium text-gray-700 mb-2">Selecciona tu talla:</p>
+                        <div class="flex gap-2">
+                            @foreach($product->sizes as $size)
+                            <label class="cursor-pointer">
+                                <input type="radio" name="size" value="{{ $size }}" class="hidden peer">
+                                <span class="px-3 py-1 border-2 border-gray-300 rounded font-medium peer-checked:border-purple-600 peer-checked:text-purple-600 hover:border-purple-400 transition">
+                                    {{ $size }}
+                                </span>
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+    {{-- Cantidad y botón --}}
     <div class="flex items-center gap-4 mb-4">
         <div class="flex items-center border-2 border-gray-300 rounded-lg">
             <button 
